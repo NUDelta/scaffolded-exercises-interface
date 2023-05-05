@@ -5,7 +5,7 @@ import Codeview1 from './../components/codeview1';
 import $ from 'jquery';
 window.$ = $;
 
-export default class Exercise1 extends React.Component {
+export default class ExerciseG extends React.Component {
     componentDidMount() {
         function eventPos(e) {
             if (e.type.match(/^touch/)) {
@@ -209,7 +209,7 @@ export default class Exercise1 extends React.Component {
             }
         })
 
-        localStorage.setItem("exercise1", data);
+        localStorage.setItem("exerciseg", data);
         
         // Convert the text to BLOB.
         const textToBLOB = new Blob([data], { type: 'text/plain' });

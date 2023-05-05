@@ -6,6 +6,14 @@ window.$ = $;
 
 export default class Exercise2 extends React.Component {
     componentDidMount() {
+
+        // check for file...
+
+
+        var exercise1_data = localStorage.getItem("exercise1");
+
+
+
         function eventPos(e) {
             if (e.type.match(/^touch/)) {
                 e = e.originalEvent.changedTouches[0];
@@ -223,16 +231,21 @@ export default class Exercise2 extends React.Component {
     downloadResponses() {
         const reflections = Array.from($('.reflection'));
         let data = '';
+        let local_data = ''
 
         // Get the data from each element on the form.
         reflections.forEach((r) => {
             if (r.innerHTML !== undefined) {
                 data += ' \r\n ' + r.innerHTML;
+                local_data += '<br/>' + "<span>"+ r.innerHTML+"</span>";
             }
             if (r.value !== undefined) {
-                data += ' \r\n ' + r.value;
+                data += r.value +' \r\n ';
+                local_data += '<br/>' + "<span>"+r.value + "</span>";
             }
         })
+        localStorage.setItem("exercise2", data);
+
 
         // Convert the text to BLOB.
         const textToBLOB = new Blob([data], { type: 'text/plain' });
@@ -303,7 +316,7 @@ export default class Exercise2 extends React.Component {
                         </div>
                         <div className="reflection-questions">
                             <div className="ref-question first-question">
-                                <div className="question-txt reflection">As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</div>
+                                <div className="question-txt reflection">As you interact with the screen, what is happening visually? What is happening to the $image instances?</div>
                                 <textarea className="response-area reflection" id="p1q1"></textarea>
                             </div>
                             <div className="ref-question">
@@ -322,6 +335,12 @@ export default class Exercise2 extends React.Component {
                             <button id="save-responses" onClick={this.downloadResponses}>Complete reflection</button>
                         </div>
                         <br></br>
+                    </div>
+                    <div id="reflection-console" style={{left:'80px'}}>
+                        Reflections from previous exercises<br/> <br/>
+                        Exercise 1: <br/>
+
+                        <pre>{localStorage.getItem("exercise1")}</pre>
                     </div>
                 </div> {/* closes div that wraps the entire information pane */}
                 <div className="map"></div>
